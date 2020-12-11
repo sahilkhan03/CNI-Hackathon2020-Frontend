@@ -10,7 +10,7 @@ const projection = geoMercator()
 
 
 
-const MapChart = ({ setTooltipContent, currentState, districtsData, max2 }) => {
+const MapChart = ({ setTooltipContent, districtsData, max2 }) => {
   const [geographies, setGeographies] = useState([])
   useEffect(() => {
     fetch("/District_Boundary.json")
