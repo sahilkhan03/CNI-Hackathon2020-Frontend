@@ -22,6 +22,9 @@ class Map extends React.Component {
         }
         return (
             <div style={{overflow: "hidden"}}>
+                <div className="text-center container">
+                    <h4>Tap/Hover on Districts to find out more!</h4>
+                </div>
                 <MapSupp currentState={currentState}></MapSupp>
             </div>
         )
