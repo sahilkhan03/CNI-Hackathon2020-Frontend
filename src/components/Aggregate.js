@@ -1,7 +1,21 @@
 import React from "react"
 import LabComponent from "./LabComponent"
+import FilterFormAggregate from "./filterFormAggregate";
 
 class Aggregate extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            labType: "",
+            labDistrict: "",
+        }
+    }
+    handleFilters = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+    
     handleReset= (event) => {
         event.preventDefault();
         this.props.history.push("/");
@@ -26,7 +40,9 @@ class Aggregate extends React.Component {
                     allocation+=ans.samples_transferred
                 }
             })
-            return (<LabComponent 
+            if(this.state.labType!=="" && parseInt(this.state.labType) === data.lab_type){
+                if(this.state.labDistrict!=="" && labDist.district_name.toLowerCase().slice(0, this.state.labDistrict.length) === this.state.labDistrict.toLowerCase()){
+                    return (<LabComponent 
                         key={i}
                         id={data.id} 
                         capacity={data.capacity} 
@@ -34,24 +50,62 @@ class Aggregate extends React.Component {
                         backlog={data.backlogs} 
                         allocation={allocation}
                     ></LabComponent>)
+                }
+                else if(this.state.labDistrict === ""){
+                    return (<LabComponent 
+                        key={i}
+                        id={data.id} 
+                        capacity={data.capacity} 
+                        name={((data.lab_type===0)?"Govt. Lab":"Private Lab") +", "+ labDist.district_name}
+                        backlog={data.backlogs} 
+                        allocation={allocation}
+                    ></LabComponent>)
+                }
+            }
+            else if(this.state.labType === ""){
+                if(this.state.labDistrict!=="" && labDist.district_name.toLowerCase().slice(0, this.state.labDistrict.length) === this.state.labDistrict.toLowerCase()){
+                    return (<LabComponent 
+                        key={i}
+                        id={data.id} 
+                        capacity={data.capacity} 
+                        name={((data.lab_type===0)?"Govt. Lab":"Private Lab") +", "+ labDist.district_name}
+                        backlog={data.backlogs} 
+                        allocation={allocation}
+                    ></LabComponent>)
+                }
+                else if(this.state.labDistrict === ""){
+                    return (<LabComponent 
+                        key={i}
+                        id={data.id} 
+                        capacity={data.capacity} 
+                        name={((data.lab_type===0)?"Govt. Lab":"Private Lab") +", "+ labDist.district_name}
+                        backlog={data.backlogs} 
+                        allocation={allocation}
+                    ></LabComponent>)
+                }
+            }
+            
         })
         return (
-            <div style={{fontSize: "0.9rem"}} className="table-responsive">
-                <table className="table table-hover">
-                    <caption>Aggregate Data</caption>
-                    <thead>
-                        <tr>
-                        <th scope="col">Lab ID</th>
-                        <th scope="col">Lab Name</th>
-                        <th scope="col">Capacity</th>
-                        <th scope="col">Allocation</th>
-                        <th scope="col">Backlog</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {table}
-                    </tbody>
-                </table>
+            <div className="container-fluid">
+                <FilterFormAggregate handleFilters={this.handleFilters}></FilterFormAggregate>
+                <div style={{fontSize: "0.9rem"}} className="table-responsive">
+                    <table className="table table-hover">
+                        <caption>Aggregate Data</caption>
+                        <thead>
+                            <tr>
+                            <th scope="col">Lab ID</th>
+                            <th scope="col">Lab Name</th>
+                            <th scope="col">Capacity</th>
+                            <th scope="col">Allocation</th>
+                            <th scope="col">Backlog</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {table}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         )
     }

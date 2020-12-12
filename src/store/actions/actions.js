@@ -20,7 +20,10 @@ export const fetchData = (formData, filesCSV) => {
     return dispatch => {
         return apiCall("https://cni-hackathon-backend.herokuapp.com/api/submitdata", formData)
             .then(res => dispatch(setWeb(res, filesCSV)))
-            .catch(err => console.log(err));
+            .catch(err => {
+                dispatch(resetWeb());
+                console.log(err)
+            });
     }
 }
 
