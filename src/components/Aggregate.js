@@ -16,6 +16,10 @@ class Aggregate extends React.Component {
         })
     }
     
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
+
     handleReset= (event) => {
         event.preventDefault();
         this.props.history.push("/");

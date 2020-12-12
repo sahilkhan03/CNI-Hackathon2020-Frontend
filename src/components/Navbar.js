@@ -2,14 +2,26 @@ import React from "react"
 import {NavLink} from "react-router-dom"
 
 export default class NavbarTest extends React.Component {
+
+    componentDidMount(){
+        (function() {
+            let subbar = document.getElementById("navbarTogglerDemo02");
+            for (let navItem of document.querySelectorAll("a.nav-link")) {
+              navItem.addEventListener("click", function(event) {
+                subbar.classList.remove("show");
+              });
+            }
+          })();
+    }
+
     render() {
         const style = {
             padding: "15px"
         }
         return (
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
                 <NavLink className="navbar-brand" to="/">Visualization</NavLink>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <button style={{border: "none", outline:"none"}} className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
 

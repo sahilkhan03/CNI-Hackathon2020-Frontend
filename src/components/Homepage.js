@@ -18,6 +18,10 @@ class Homepage extends Component {
       }
     }
 
+    componentDidMount() {
+      window.scrollTo(0, 0)
+    }
+
     onFileChange = event => {
       let newState = {
         ...this.state

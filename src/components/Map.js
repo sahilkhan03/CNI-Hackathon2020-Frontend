@@ -4,6 +4,10 @@ import MapSupp from "./MapSupp"
 
 
 class Map extends React.Component {
+
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
     
     handleReset= (event) => {
         event.preventDefault();

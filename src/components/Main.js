@@ -11,7 +11,7 @@ import {fetchData, resetData} from "../store/actions/actions"
 const Main = props => {
     const {currentState, fetchData, resetData} = props;
     return (
-        <div className="container">
+        <div className="container my-5">
             <Switch>
                 <Route exact path="/" render={ props => <Homepage currentState={currentState} resetData={resetData} fetchData={fetchData} {...props}/>}></Route>
                 <Route exact path="/aggregate" render={ props => <Aggregate fetchData={fetchData} currentState={currentState} {...props}/>}></Route>

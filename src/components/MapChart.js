@@ -1,7 +1,7 @@
 
 // src/components/WorldMap.js
 
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { geoMercator, geoPath } from "d3-geo"
 import { feature } from "topojson-client"
 
@@ -12,18 +12,18 @@ const projection = geoMercator()
 
 const MapChart = ({ setTooltipContent, districtsData, max2 }) => {
   const [geographies, setGeographies] = useState([])
-  useEffect(() => {
+  if(geographies.length === 0){
     fetch("/District_Boundary.json")
-      .then(response => {
-        if (response.status !== 200) {
-          console.log(`There was a problem: ${response.status}`)
-          return
-        }
-        response.json().then(stateData => {
-          setGeographies(feature(stateData, stateData.objects.Karnataka).features)
-        })
-      })       
-  })
+    .then(response => {
+      if (response.status !== 200) {
+        console.log(`There was a problem: ${response.status}`)
+        return
+      }
+      response.json().then(stateData => {
+        setGeographies(feature(stateData, stateData.objects.Karnataka).features)
+      })
+    }) 
+  } 
 
   return (
     <svg width={ window.innerWidth*((window.innerWidth < 800)?0.9:0.8) } height={ window.innerHeight*0.6 } viewBox="0 0 800 800">

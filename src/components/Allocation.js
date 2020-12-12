@@ -16,6 +16,9 @@ class Allocation extends React.Component {
             [e.target.name]: e.target.value
         })
     }
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
 
     handleReset= (event) => {
         event.preventDefault();
