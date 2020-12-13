@@ -23,6 +23,7 @@ export const fetchData = (formData, filesCSV) => {
             .catch(err => {
                 dispatch(resetWeb());
                 console.log(err)
+                alert("Invalid Files!")
             });
     }
 }

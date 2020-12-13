@@ -5,8 +5,6 @@ import {csv2json} from "csvjson-csv2json"
 import Loader from "./loader";
 import {Info} from "./info"
 
-const labels = ["District Data File!", "Lab Data File!"];
-
 let fileReader, fileReader1;
 class Homepage extends Component { 
     constructor(props){
@@ -18,6 +16,8 @@ class Homepage extends Component {
       }
     }
 
+    labels = ["District Data File!", "Lab Data File!"];
+
     componentDidMount() {
       window.scrollTo(0, 0)
     }
@@ -28,11 +28,11 @@ class Homepage extends Component {
       }
       if(event.target.name === "labData"){
         newState.labData = event.target.files[0];
-        labels[1] = newState.labData.name;
+        this.labels[1] = newState.labData.name;
       }
       if(event.target.name === "districtData"){
         newState.districtData = event.target.files[0];
-        labels[0] = newState.districtData.name;
+        this.labels[0] = newState.districtData.name;
       }
       this.setState(newState);
     }; 
@@ -75,8 +75,8 @@ class Homepage extends Component {
     }
     handleReset= (event) => {
       event.preventDefault();
-      labels[0] = "District Data File!"
-      labels[1] = "Lab Data File!"
+      this.labels[0] = "District Data File!"
+      this.labels[1] = "Lab Data File!"
       this.props.resetData();
       this.props.history.push("/");
     }
@@ -113,7 +113,7 @@ class Homepage extends Component {
                     onChange={this.onFileChange}
                     required
                 ></input>
-                <label className="custom-file-label" htmlFor="districtData">{labels[0]}</label>
+                <label className="custom-file-label" htmlFor="districtData">{this.labels[0]}</label>
               </div>
             </div>
             &nbsp;
@@ -127,7 +127,7 @@ class Homepage extends Component {
                     onChange={this.onFileChange}
                     required
                 ></input>
-                <label className="custom-file-label" htmlFor="labData">{labels[1]}</label>
+                <label className="custom-file-label" htmlFor="labData">{this.labels[1]}</label>
               </div>
             </div>
             <br></br>

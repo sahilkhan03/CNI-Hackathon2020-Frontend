@@ -1,6 +1,7 @@
 import MapChart from "./MapChart"
 import React from "react"
 import ReactTooltip from "react-tooltip";
+import Error from "./Error"
 
 function MapSupp({currentState}) {
   const [content, setContent] = React.useState({
@@ -16,6 +17,11 @@ function MapSupp({currentState}) {
 
   const setData = (data) => {
     const answer=data.formData, districts=data.filesCSV[0], labs=data.filesCSV[1];
+    if(districts[0].district_id === undefined || labs[0].id === undefined){
+      return (
+          <Error></Error>
+      )
+  }
     districtsData = districts.map((dist) => {
       let noOfLabs=0, totalCases = 0, casesAllocated=0;
       answer.forEach((ans)=>{

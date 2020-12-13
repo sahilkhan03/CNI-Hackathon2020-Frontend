@@ -1,6 +1,7 @@
 import React from "react"
 import DistrictComponent from "./DistrictComponent"
 import FilterFormAllocation from "./filterFormAllocation";
+import Error from "./Error"
 
 class Allocation extends React.Component {
     constructor(props){
@@ -36,6 +37,11 @@ class Allocation extends React.Component {
             )
         }
         const answer=currentState.formData, districts=currentState.filesCSV[0], labs=currentState.filesCSV[1];
+        if(districts[0].district_id === undefined || labs[0].id === undefined){
+            return (
+                <Error></Error>
+            )
+        }
         const table = answer.map((data, i)=> {
             const dist = districts.find((d)=> 
                 parseInt(data.source) === parseInt(d.district_id)

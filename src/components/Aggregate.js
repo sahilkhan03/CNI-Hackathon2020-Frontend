@@ -1,6 +1,7 @@
 import React from "react"
 import LabComponent from "./LabComponent"
 import FilterFormAggregate from "./filterFormAggregate";
+import Error from "./Error"
 
 class Aggregate extends React.Component {
     constructor(props) {
@@ -36,6 +37,11 @@ class Aggregate extends React.Component {
             )
         }
         const answer=currentState.formData, districts=currentState.filesCSV[0], labs=currentState.filesCSV[1];
+        if(districts[0].district_id === undefined || labs[0].id === undefined){
+            return (
+                <Error></Error>
+            )
+        }
         const table = labs.map((data, i)=> {
             var allocation=0;
             let labDist = districts.find((d)=>parseInt(data.district_id) === parseInt(d.district_id))
