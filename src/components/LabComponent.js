@@ -8,7 +8,9 @@ class DistrictComponent extends React.Component {
                 <th scope="row">{id}</th>
                 <td>{name}</td>
                 <td>{capacity}</td>
-                <td>{allocation}</td>
+                <td>
+                    {allocation>(capacity-backlog)?(allocation+"("+(capacity-backlog)+"+"+(allocation+backlog-capacity)+" Overload)"):allocation}
+                </td>
                 <td>{backlog}</td>
             </tr>
         )
